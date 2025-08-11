@@ -1,0 +1,97 @@
+/* Styles pour la section hero */
+
+/* Animation pour l'indicateur de scroll */
+@keyframes bounceInDelayed {
+  0% {
+    transform: translateY(20px) scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-5px) scale(1.02);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-bounce-in-delayed {
+  animation: bounceInDelayed 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* Animation pour les éléments flottants */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Animation scintillement pour les étoiles */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* Effet de gradient pour les bordures */
+.border-gradient {
+  position: relative;
+  background: linear-gradient(45deg, var(--primary-400), var(--secondary-400), var(--primary-400));
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Effet de glow sur hover pour le bouton contact */
+.btn-glow:hover {
+  box-shadow:
+    0 0 20px rgba(243, 149, 50, 0.3),
+    0 0 40px rgba(243, 149, 50, 0.2),
+    0 0 60px rgba(243, 149, 50, 0.1);
+}
+
+/* Animation pour le texte avec gradient */
+.text-gradient-animated {
+  background: linear-gradient(
+    45deg,
+    var(--primary-200),
+    var(--primary-300),
+    var(--secondary-200),
+    var(--primary-200)
+  );
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease infinite;
+}

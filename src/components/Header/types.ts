@@ -5,6 +5,8 @@
 export interface NavigationItem {
   id: string;
   label: string;
+  href?: string; // URL pour la navigation
+  isExternal?: boolean; // Lien externe ou navigation interne
 }
 
 export interface HeaderProps {

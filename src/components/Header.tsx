@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   DesktopNavigation,
   LanguageSelector,
@@ -14,11 +15,22 @@ import {
  */
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('portfolio');
+  const [activeSection, setActiveSection] = useState('home');
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState('FR');
   const [showBorderAnimation, setShowBorderAnimation] = useState(false);
+
+  const location = useLocation();
+
+  // Update active section based on current route
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setActiveSection('home');
+    } else if (location.pathname === '/portfolio') {
+      setActiveSection('portfolio');
+    }
+  }, [location.pathname]);
 
   // Handle scroll effect
   useEffect(() => {
@@ -55,7 +67,8 @@ const Header = () => {
   }, [isMobileMenuOpen]);
 
   const navigationItems: NavigationItem[] = [
-    { id: 'portfolio', label: 'Portfolio' },
+    { id: 'home', label: 'Accueil', href: '/' },
+    { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
     { id: 'services', label: 'Services' },
     { id: 'about', label: 'À propos' },
   ];

@@ -3,3 +3,13 @@
 @import './styles/animations.css';
 @import './styles/header.css';
 @import './styles/footer.css';
+@import './styles/hero.css';
+
+/* Utilitaires CSS supplémentaires */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

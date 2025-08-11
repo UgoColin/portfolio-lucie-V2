@@ -1,3 +1,4 @@
+import { Link, useLocation } from 'react-router-dom';
 import type { MobileMenuProps } from './types';
 
 /**
@@ -14,6 +15,28 @@ const MobileMenu = ({
   currentLang,
   setCurrentLang,
 }: MobileMenuProps) => {
+  const location = useLocation();
+
+  const handleNavClick = (item: any) => {
+    if (item.href && !item.isExternal) {
+      setActiveSection(item.id);
+    } else if (!item.href) {
+      setActiveSection(item.id);
+      const element = document.getElementById(item.id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  const isActive = (item: any) => {
+    if (item.href) {
+      return location.pathname === item.href;
+    }
+    return activeSection === item.id;
+  };
+
   if (!isMobileMenuOpen) return null;
 
   return (
@@ -47,23 +70,42 @@ const MobileMenu = ({
 
         {/* Navigation Links */}
         <nav className="flex flex-col items-center justify-center space-y-8">
-          {navigationItems.map((item, index) => (
-            <button
-              key={item.id}
-              onClick={() => {
-                setActiveSection(item.id);
-                setIsMobileMenuOpen(false);
-              }}
-              className={`mobile-nav-link cursor-pointer text-4xl font-bold opacity-0 transition-all duration-300 ease-out ${
-                activeSection === item.id ? 'text-white' : 'text-neutral-400 hover:text-white'
-              } animate-slide-up-fade`}
-              style={{
-                animationDelay: `${200 + index * 150}ms`,
-                textShadow: activeSection === item.id ? '0 0 20px rgba(255,255,255,0.3)' : 'none',
-              }}>
-              {item.label.toUpperCase()}
-            </button>
-          ))}
+          {navigationItems.map((item, index) => {
+            const active = isActive(item);
+
+            if (item.href && !item.isExternal) {
+              return (
+                <Link
+                  key={item.id}
+                  to={item.href}
+                  onClick={() => handleNavClick(item)}
+                  className={`mobile-nav-link cursor-pointer text-4xl font-bold opacity-0 transition-all duration-300 ease-out ${
+                    active ? 'text-white' : 'text-neutral-400 hover:text-white'
+                  } animate-slide-up-fade`}
+                  style={{
+                    animationDelay: `${200 + index * 150}ms`,
+                    textShadow: active ? '0 0 20px rgba(255,255,255,0.3)' : 'none',
+                  }}>
+                  {item.label.toUpperCase()}
+                </Link>
+              );
+            } else {
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item)}
+                  className={`mobile-nav-link cursor-pointer text-4xl font-bold opacity-0 transition-all duration-300 ease-out ${
+                    active ? 'text-white' : 'text-neutral-400 hover:text-white'
+                  } animate-slide-up-fade`}
+                  style={{
+                    animationDelay: `${200 + index * 150}ms`,
+                    textShadow: active ? '0 0 20px rgba(255,255,255,0.3)' : 'none',
+                  }}>
+                  {item.label.toUpperCase()}
+                </button>
+              );
+            }
+          })}
 
           {/* Contact link */}
           <button
