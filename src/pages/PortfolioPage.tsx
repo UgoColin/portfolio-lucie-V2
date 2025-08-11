@@ -1,8 +1,14 @@
+import { usePageTitle, usePageMeta } from '@/hooks/usePageTitle';
+
 /**
  * Portfolio page component for displaying graphic design projects
  * Currently shows a test message to verify navigation functionality
  */
 const PortfolioPage = () => {
+  // Mettre à jour le titre et les meta tags de la page
+  usePageTitle();
+  usePageMeta('Découvrez mes projets de design graphique, créations visuelles et réalisations créatives');
+
   return (
     <main className="min-h-screen pt-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">

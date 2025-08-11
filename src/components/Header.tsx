@@ -69,8 +69,6 @@ const Header = () => {
   const navigationItems: NavigationItem[] = [
     { id: 'home', label: 'Accueil', href: '/' },
     { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
-    { id: 'services', label: 'Services' },
-    { id: 'about', label: 'À propos' },
   ];
 
   const languages = ['FR', 'EN'];
